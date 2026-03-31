@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import ItemsTable from "@/components/dashboard/itemsTable";
+import ItemsTable from "@/components/dashboard/items-table";
 import { useItems } from "@/hooks/useItems";
 
 export default function DashboardPage() {
@@ -9,6 +9,12 @@ export default function DashboardPage() {
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+
+  const totalItems = data.length;
+  const activeItems = data.filter((item) => item.status === "active").length;
+  const inactiveItems = data.filter(
+    (item) => item.status === "inactive",
+  ).length;
 
   const filteredItems = useMemo(() => {
     return data.filter((item) => {
@@ -24,42 +30,73 @@ export default function DashboardPage() {
   }, [data, search, statusFilter]);
 
   if (isLoading) {
-    return <div className="p-6">Loading items...</div>;
+    return <div className="p-6 text-sm text-slate-600">Loading items...</div>;
   }
 
   if (isError) {
-    return <div className="p-6 text-red-500">Something went wrong.</div>;
+    return (
+      <div className="p-6 text-sm text-red-600">Something went wrong.</div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+    <div className="min-h-screen bg-[#f7f8fa] px-6 py-8">
       <div className="mx-auto max-w-6xl space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
-          <p className="mt-2 text-sm text-slate-600">
+        <div className="space-y-1">
+          <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
+          <p className="text-sm text-slate-500">
             Manage and explore your portfolio items.
           </p>
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+            <p className="text-sm text-slate-500">Total Items</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-900">
+              {totalItems}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+            <p className="text-sm text-slate-500">Active</p>
+            <p className="mt-2 text-2xl font-semibold text-emerald-700">
+              {activeItems}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+            <p className="text-sm text-slate-500">Inactive</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-700">
+              {inactiveItems}
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-4 md:flex-row">
             <input
               type="text"
-              placeholder="Search by item name..."
+              placeholder="Search items..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none"
+              className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10"
             />
 
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none md:w-56"
-            >
-              <option value="all">All statuses</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
+            <div className="relative w-full md:w-48">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="w-full appearance-none rounded-md border border-gray-300 bg-white px-3 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10"
+              >
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+
+              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                <span className="text-xs">▾</span>
+              </div>
+            </div>
           </div>
         </div>
 

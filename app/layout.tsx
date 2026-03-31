@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ReactQueryProvider from "@/lib/react-query/provider";
+import Topbar from "@/components/layout/topbar";
 
 export const metadata: Metadata = {
   title: "Portfolio Admin Dashboard",
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <Topbar />
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );
