@@ -2,6 +2,7 @@ import { Item } from "@/types/item";
 
 type ItemsTableProps = {
   items?: Item[];
+  onRowClick?: (item: Item) => void;
 };
 
 function StatusBadge({ status }: { status: Item["status"] }) {
@@ -20,7 +21,10 @@ function StatusBadge({ status }: { status: Item["status"] }) {
   );
 }
 
-export default function ItemsTable({ items = [] }: ItemsTableProps) {
+export default function ItemsTable({
+  items = [],
+  onRowClick,
+}: ItemsTableProps) {
   if (!items.length) {
     return (
       <div className="rounded-xl border border-gray-200 bg-white p-10 text-center shadow-sm">
@@ -58,7 +62,8 @@ export default function ItemsTable({ items = [] }: ItemsTableProps) {
           {items.map((item) => (
             <tr
               key={item.id}
-              className="border-b border-slate-100 transition-colors hover:bg-slate-50 last:border-b-0"
+              onClick={() => onRowClick?.(item)}
+              className="cursor-pointer border-b border-slate-100 transition-colors hover:bg-slate-50 last:border-b-0"
             >
               <td className="px-5 py-4 font-medium text-slate-900">
                 {item.name}
