@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { toast } from "sonner";
 import ItemDrawer from "@/components/dashboard/item-drawer";
 import ItemsTable from "@/components/dashboard/items-table";
 import {
@@ -68,22 +69,33 @@ export default function DashboardPage() {
   }
 
   async function handleSaveItem(savedItem: Item) {
-    if (isCreateMode) {
-      await createItemMutation.mutateAsync(savedItem);
-      setSelectedItem(savedItem);
-      setIsCreateMode(false);
-      return;
-    }
+    try {
+      if (isCreateMode) {
+        await createItemMutation.mutateAsync(savedItem);
+        setSelectedItem(savedItem);
+        setIsCreateMode(false);
+        toast.success("Item created successfully.");
+        return;
+      }
 
-    await updateItemMutation.mutateAsync(savedItem);
-    setSelectedItem(savedItem);
+      await updateItemMutation.mutateAsync(savedItem);
+      setSelectedItem(savedItem);
+      toast.success("Item updated successfully.");
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
   }
 
   async function handleDeleteItem(itemId: string) {
-    await deleteItemMutation.mutateAsync(itemId);
-    setSelectedItem(null);
-    setIsDrawerOpen(false);
-    setIsCreateMode(false);
+    try {
+      await deleteItemMutation.mutateAsync(itemId);
+      setSelectedItem(null);
+      setIsDrawerOpen(false);
+      setIsCreateMode(false);
+      toast.success("Item deleted successfully.");
+    } catch {
+      toast.error("Unable to delete item. Please try again.");
+    }
   }
 
   if (isLoading) {
