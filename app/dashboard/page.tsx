@@ -40,8 +40,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa] px-6 py-8">
-      <div className="mx-auto max-w-6xl space-y-6">
+    <div className="min-h-full bg-[#f7f8fa] px-6 py-8">
+      <div className="mx-auto max-w-6xl space-y-6 w-full">
         <div className="space-y-1">
           <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
           <p className="text-sm text-slate-500">
