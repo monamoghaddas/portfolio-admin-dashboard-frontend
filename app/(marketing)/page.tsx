@@ -9,10 +9,10 @@ const featuredProjects = [
     href: "/dashboard",
   },
   {
-    title: "Frontend Architecture",
+    title: "Engineering notes",
     description:
-      "Reusable component patterns, scalable folder structure, UI state management, and clean separation of data, hooks, and presentation logic.",
-    href: "/dashboard",
+      "How this repo is structured: App Router layouts, data layer, React Query hooks, and the in-memory demo API that powers the UI.",
+    href: "/engineering",
   },
 ];
 

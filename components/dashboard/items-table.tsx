@@ -4,6 +4,8 @@ type ItemsTableProps = {
   items?: Item[];
   selectedItemId?: string | null;
   onRowClick?: (item: Item) => void;
+  /** When true, rows are not clickable and selection styling is hidden. */
+  readOnly?: boolean;
 };
 
 function StatusBadge({ status }: { status: Item["status"] }) {
@@ -26,6 +28,7 @@ export default function ItemsTable({
   items = [],
   selectedItemId,
   onRowClick,
+  readOnly = false,
 }: ItemsTableProps) {
   if (!items.length) {
     return (
@@ -35,8 +38,9 @@ export default function ItemsTable({
             No items found
           </h3>
           <p className="text-sm leading-6 text-slate-500">
-            Try adjusting your search or filter to find what you are looking
-            for.
+            {readOnly
+              ? "There are no items to show yet."
+              : "Try adjusting your search or filter to find what you are looking for."}
           </p>
         </div>
       </div>
@@ -62,14 +66,16 @@ export default function ItemsTable({
 
         <tbody>
           {items.map((item) => {
-            const isSelected = item.id === selectedItemId;
+            const isSelected = !readOnly && item.id === selectedItemId;
 
             return (
               <tr
                 key={item.id}
-                onClick={() => onRowClick?.(item)}
-                className={`cursor-pointer border-b border-slate-100 transition-colors last:border-b-0 ${
-                  isSelected ? "bg-[#1e3a5f]/[0.06]" : "hover:bg-slate-50"
+                onClick={readOnly ? undefined : () => onRowClick?.(item)}
+                className={`border-b border-slate-100 transition-colors last:border-b-0 ${
+                  readOnly
+                    ? "cursor-default hover:bg-slate-50/80"
+                    : `cursor-pointer ${isSelected ? "bg-[#1e3a5f]/[0.06]" : "hover:bg-slate-50"}`
                 }`}
               >
                 <td className="px-5 py-4 font-medium text-slate-900">
