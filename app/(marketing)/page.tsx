@@ -74,6 +74,7 @@ export default function HomePage() {
                 alt="Mona Moghaddas"
                 fill
                 priority
+                sizes="(max-width: 1024px) 90vw, 320px"
                 className="object-cover"
               />
             </div>
