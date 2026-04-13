@@ -8,8 +8,8 @@ type ItemDrawerProps = {
   isOpen: boolean;
   isCreateMode?: boolean;
   onClose: () => void;
-  onSave: (item: Item) => void;
-  onDelete: (itemId: string) => void;
+  onSave: (item: Item) => Promise<void> | void;
+  onDelete: (itemId: string) => Promise<void> | void;
 };
 
 type FormValues = {
@@ -73,13 +73,13 @@ export default function ItemDrawer({
     }));
   }
 
-  function handleSave() {
+  async function handleSave() {
     const nextItem: Item = {
       id: item?.id ?? crypto.randomUUID(),
       ...formValues,
     };
 
-    onSave(nextItem);
+    await onSave(nextItem);
     setIsEditing(false);
   }
 
@@ -93,10 +93,9 @@ export default function ItemDrawer({
     setIsEditing(false);
   }
 
-  function handleDelete() {
+  async function handleDelete() {
     if (!item) return;
-
-    onDelete(item.id);
+    await onDelete(item.id);
   }
 
   const title = isCreateMode ? "Create Item" : "Item Details";
@@ -283,8 +282,7 @@ export default function ItemDrawer({
                   </p>
                   <p className="mt-2 text-sm leading-6 text-slate-600">
                     This drawer demonstrates create, edit, and delete flows in a
-                    shared component, which is a common scalable product
-                    pattern.
+                    shared component, with React Query cache updates.
                   </p>
                 </div>
               </div>

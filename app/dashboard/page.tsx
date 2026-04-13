@@ -3,31 +3,34 @@
 import { useMemo, useState } from "react";
 import ItemDrawer from "@/components/dashboard/item-drawer";
 import ItemsTable from "@/components/dashboard/items-table";
+import {
+  useCreateItem,
+  useDeleteItem,
+  useUpdateItem,
+} from "@/hooks/use-item-mutation";
 import { useItems } from "@/hooks/useItems";
 import { Item } from "@/types/item";
 
 export default function DashboardPage() {
   const { data = [], isLoading, isError } = useItems();
+  const createItemMutation = useCreateItem();
+  const updateItemMutation = useUpdateItem();
+  const deleteItemMutation = useDeleteItem();
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isCreateMode, setIsCreateMode] = useState(false);
-  const [localItems, setLocalItems] = useState<Item[] | null>(null);
 
-  const sourceItems = localItems ?? data;
-
-  const totalItems = sourceItems.length;
-  const activeItems = sourceItems.filter(
-    (item) => item.status === "active",
-  ).length;
-  const inactiveItems = sourceItems.filter(
+  const totalItems = data.length;
+  const activeItems = data.filter((item) => item.status === "active").length;
+  const inactiveItems = data.filter(
     (item) => item.status === "inactive",
   ).length;
 
   const filteredItems = useMemo(() => {
-    return sourceItems.filter((item) => {
+    return data.filter((item) => {
       const matchesSearch = item.name
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -37,7 +40,7 @@ export default function DashboardPage() {
 
       return matchesSearch && matchesStatus;
     });
-  }, [sourceItems, search, statusFilter]);
+  }, [data, search, statusFilter]);
 
   function handleRowClick(item: Item) {
     setSelectedItem(item);
@@ -56,32 +59,20 @@ export default function DashboardPage() {
     setIsCreateMode(false);
   }
 
-  function handleSaveItem(savedItem: Item) {
+  async function handleSaveItem(savedItem: Item) {
     if (isCreateMode) {
-      setLocalItems((prev) => {
-        const base = prev ?? data;
-        return [savedItem, ...base];
-      });
-
+      await createItemMutation.mutateAsync(savedItem);
       setSelectedItem(savedItem);
       setIsCreateMode(false);
       return;
     }
 
-    setLocalItems((prev) => {
-      const base = prev ?? data;
-      return base.map((item) => (item.id === savedItem.id ? savedItem : item));
-    });
-
+    await updateItemMutation.mutateAsync(savedItem);
     setSelectedItem(savedItem);
   }
 
-  function handleDeleteItem(itemId: string) {
-    setLocalItems((prev) => {
-      const base = prev ?? data;
-      return base.filter((item) => item.id !== itemId);
-    });
-
+  async function handleDeleteItem(itemId: string) {
+    await deleteItemMutation.mutateAsync(itemId);
     setSelectedItem(null);
     setIsDrawerOpen(false);
     setIsCreateMode(false);
