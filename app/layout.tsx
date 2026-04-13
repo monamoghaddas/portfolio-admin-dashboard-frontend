@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ReactQueryProvider from "@/lib/react-query/provider";
-import Topbar from "@/components/layout/topbar";
-import AppShell from "@/components/layout/app-shell";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
@@ -19,8 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ReactQueryProvider>
-          <Topbar />
-          <AppShell>{children}</AppShell>
+          {children}
           <Toaster position="top-right" richColors />
         </ReactQueryProvider>
       </body>

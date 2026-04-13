@@ -2,6 +2,7 @@ import { Item } from "@/types/item";
 
 type ItemsTableProps = {
   items?: Item[];
+  selectedItemId?: string | null;
   onRowClick?: (item: Item) => void;
 };
 
@@ -23,6 +24,7 @@ function StatusBadge({ status }: { status: Item["status"] }) {
 
 export default function ItemsTable({
   items = [],
+  selectedItemId,
   onRowClick,
 }: ItemsTableProps) {
   if (!items.length) {
@@ -59,21 +61,34 @@ export default function ItemsTable({
         </thead>
 
         <tbody>
-          {items.map((item) => (
-            <tr
-              key={item.id}
-              onClick={() => onRowClick?.(item)}
-              className="cursor-pointer border-b border-slate-100 transition-colors hover:bg-slate-50 last:border-b-0"
-            >
-              <td className="px-5 py-4 font-medium text-slate-900">
-                {item.name}
-              </td>
-              <td className="px-5 py-4">
-                <StatusBadge status={item.status} />
-              </td>
-              <td className="px-5 py-4 text-slate-600">{item.createdAt}</td>
-            </tr>
-          ))}
+          {items.map((item) => {
+            const isSelected = item.id === selectedItemId;
+
+            return (
+              <tr
+                key={item.id}
+                onClick={() => onRowClick?.(item)}
+                className={`cursor-pointer border-b border-slate-100 transition-colors last:border-b-0 ${
+                  isSelected ? "bg-[#1e3a5f]/[0.06]" : "hover:bg-slate-50"
+                }`}
+              >
+                <td className="px-5 py-4 font-medium text-slate-900">
+                  <div className="flex items-center gap-3">
+                    {isSelected && (
+                      <span className="h-2 w-2 rounded-full bg-[#1e3a5f]" />
+                    )}
+                    <span>{item.name}</span>
+                  </div>
+                </td>
+
+                <td className="px-5 py-4">
+                  <StatusBadge status={item.status} />
+                </td>
+
+                <td className="px-5 py-4 text-slate-600">{item.createdAt}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -66,6 +66,7 @@ export default function DashboardPage() {
 
     setIsDrawerOpen(false);
     setIsCreateMode(false);
+    setSelectedItem(null);
   }
 
   async function handleSaveItem(savedItem: Item) {
@@ -182,7 +183,11 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <ItemsTable items={filteredItems} onRowClick={handleRowClick} />
+          <ItemsTable
+            items={filteredItems}
+            selectedItemId={selectedItem?.id ?? null}
+            onRowClick={handleRowClick}
+          />
         </div>
       </div>
 
