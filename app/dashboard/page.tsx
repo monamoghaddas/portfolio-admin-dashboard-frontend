@@ -13,15 +13,20 @@ export default function DashboardPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [localItems, setLocalItems] = useState<Item[]>([]);
 
-  const totalItems = data.length;
-  const activeItems = data.filter((item) => item.status === "active").length;
-  const inactiveItems = data.filter(
+  const sourceItems = localItems.length ? localItems : data;
+
+  const totalItems = sourceItems.length;
+  const activeItems = sourceItems.filter(
+    (item) => item.status === "active",
+  ).length;
+  const inactiveItems = sourceItems.filter(
     (item) => item.status === "inactive",
   ).length;
 
   const filteredItems = useMemo(() => {
-    return data.filter((item) => {
+    return sourceItems.filter((item) => {
       const matchesSearch = item.name
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -31,7 +36,7 @@ export default function DashboardPage() {
 
       return matchesSearch && matchesStatus;
     });
-  }, [data, search, statusFilter]);
+  }, [sourceItems, search, statusFilter]);
 
   function handleRowClick(item: Item) {
     setSelectedItem(item);
@@ -40,6 +45,18 @@ export default function DashboardPage() {
 
   function handleCloseDrawer() {
     setIsDrawerOpen(false);
+  }
+
+  function handleSaveItem(updatedItem: Item) {
+    const nextItems =
+      localItems.length > 0
+        ? localItems.map((item) =>
+            item.id === updatedItem.id ? updatedItem : item,
+          )
+        : data.map((item) => (item.id === updatedItem.id ? updatedItem : item));
+
+    setLocalItems(nextItems);
+    setSelectedItem(updatedItem);
   }
 
   if (isLoading) {
@@ -119,9 +136,11 @@ export default function DashboardPage() {
       </div>
 
       <ItemDrawer
+        key={selectedItem?.id ?? "empty"}
         item={selectedItem}
         isOpen={isDrawerOpen}
         onClose={handleCloseDrawer}
+        onSave={handleSaveItem}
       />
     </>
   );
