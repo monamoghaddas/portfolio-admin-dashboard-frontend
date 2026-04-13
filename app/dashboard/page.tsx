@@ -13,9 +13,10 @@ export default function DashboardPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [localItems, setLocalItems] = useState<Item[]>([]);
+  const [isCreateMode, setIsCreateMode] = useState(false);
+  const [localItems, setLocalItems] = useState<Item[] | null>(null);
 
-  const sourceItems = localItems.length ? localItems : data;
+  const sourceItems = localItems ?? data;
 
   const totalItems = sourceItems.length;
   const activeItems = sourceItems.filter(
@@ -40,23 +41,50 @@ export default function DashboardPage() {
 
   function handleRowClick(item: Item) {
     setSelectedItem(item);
+    setIsCreateMode(false);
+    setIsDrawerOpen(true);
+  }
+
+  function handleCreateNew() {
+    setSelectedItem(null);
+    setIsCreateMode(true);
     setIsDrawerOpen(true);
   }
 
   function handleCloseDrawer() {
     setIsDrawerOpen(false);
+    setIsCreateMode(false);
   }
 
-  function handleSaveItem(updatedItem: Item) {
-    const nextItems =
-      localItems.length > 0
-        ? localItems.map((item) =>
-            item.id === updatedItem.id ? updatedItem : item,
-          )
-        : data.map((item) => (item.id === updatedItem.id ? updatedItem : item));
+  function handleSaveItem(savedItem: Item) {
+    if (isCreateMode) {
+      setLocalItems((prev) => {
+        const base = prev ?? data;
+        return [savedItem, ...base];
+      });
 
-    setLocalItems(nextItems);
-    setSelectedItem(updatedItem);
+      setSelectedItem(savedItem);
+      setIsCreateMode(false);
+      return;
+    }
+
+    setLocalItems((prev) => {
+      const base = prev ?? data;
+      return base.map((item) => (item.id === savedItem.id ? savedItem : item));
+    });
+
+    setSelectedItem(savedItem);
+  }
+
+  function handleDeleteItem(itemId: string) {
+    setLocalItems((prev) => {
+      const base = prev ?? data;
+      return base.filter((item) => item.id !== itemId);
+    });
+
+    setSelectedItem(null);
+    setIsDrawerOpen(false);
+    setIsCreateMode(false);
   }
 
   if (isLoading) {
@@ -73,11 +101,23 @@ export default function DashboardPage() {
     <>
       <div className="min-h-full bg-[#f7f8fa] px-6 py-8">
         <div className="mx-auto max-w-6xl space-y-6">
-          <div className="space-y-1">
-            <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
-            <p className="text-sm text-slate-500">
-              Manage and explore your portfolio items.
-            </p>
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div className="space-y-1">
+              <h1 className="text-2xl font-semibold text-slate-900">
+                Dashboard
+              </h1>
+              <p className="text-sm text-slate-500">
+                Manage and explore your portfolio items.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleCreateNew}
+              className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+            >
+              + New Item
+            </button>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
@@ -136,11 +176,13 @@ export default function DashboardPage() {
       </div>
 
       <ItemDrawer
-        key={selectedItem?.id ?? "empty"}
+        key={isCreateMode ? "create" : (selectedItem?.id ?? "empty")}
         item={selectedItem}
         isOpen={isDrawerOpen}
+        isCreateMode={isCreateMode}
         onClose={handleCloseDrawer}
         onSave={handleSaveItem}
+        onDelete={handleDeleteItem}
       />
     </>
   );
