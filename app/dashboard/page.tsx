@@ -55,6 +55,14 @@ export default function DashboardPage() {
   }
 
   function handleCloseDrawer() {
+    if (
+      createItemMutation.isPending ||
+      updateItemMutation.isPending ||
+      deleteItemMutation.isPending
+    ) {
+      return;
+    }
+
     setIsDrawerOpen(false);
     setIsCreateMode(false);
   }
@@ -171,6 +179,8 @@ export default function DashboardPage() {
         item={selectedItem}
         isOpen={isDrawerOpen}
         isCreateMode={isCreateMode}
+        isSaving={createItemMutation.isPending || updateItemMutation.isPending}
+        isDeleting={deleteItemMutation.isPending}
         onClose={handleCloseDrawer}
         onSave={handleSaveItem}
         onDelete={handleDeleteItem}

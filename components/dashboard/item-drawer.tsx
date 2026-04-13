@@ -7,6 +7,8 @@ type ItemDrawerProps = {
   item: Item | null;
   isOpen: boolean;
   isCreateMode?: boolean;
+  isSaving?: boolean;
+  isDeleting?: boolean;
   onClose: () => void;
   onSave: (item: Item) => Promise<void> | void;
   onDelete: (itemId: string) => Promise<void> | void;
@@ -54,6 +56,8 @@ export default function ItemDrawer({
   item,
   isOpen,
   isCreateMode = false,
+  isSaving = false,
+  isDeleting = false,
   onClose,
   onSave,
   onDelete,
@@ -62,6 +66,9 @@ export default function ItemDrawer({
   const [formValues, setFormValues] = useState<FormValues>(() =>
     getFormValues(item, isCreateMode),
   );
+
+  const isBusy = isSaving || isDeleting;
+  const isNameEmpty = !formValues.name.trim();
 
   function handleFieldChange<K extends keyof FormValues>(
     field: K,
@@ -74,9 +81,12 @@ export default function ItemDrawer({
   }
 
   async function handleSave() {
+    if (isNameEmpty || isBusy) return;
+
     const nextItem: Item = {
       id: item?.id ?? crypto.randomUUID(),
       ...formValues,
+      name: formValues.name.trim(),
     };
 
     await onSave(nextItem);
@@ -84,6 +94,8 @@ export default function ItemDrawer({
   }
 
   function handleCancel() {
+    if (isBusy) return;
+
     if (isCreateMode) {
       onClose();
       return;
@@ -94,7 +106,7 @@ export default function ItemDrawer({
   }
 
   async function handleDelete() {
-    if (!item) return;
+    if (!item || isBusy) return;
     await onDelete(item.id);
   }
 
@@ -106,7 +118,7 @@ export default function ItemDrawer({
   return (
     <>
       <div
-        onClick={onClose}
+        onClick={isBusy ? undefined : onClose}
         className={`fixed inset-0 z-40 bg-slate-900/30 transition-opacity ${
           isOpen
             ? "pointer-events-auto opacity-100"
@@ -129,7 +141,8 @@ export default function ItemDrawer({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md px-2 py-1 text-sm text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
+              disabled={isBusy}
+              className="rounded-md px-2 py-1 text-sm text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
             >
               ✕
             </button>
@@ -149,15 +162,17 @@ export default function ItemDrawer({
                         <button
                           type="button"
                           onClick={handleDelete}
-                          className="rounded-md border border-red-200 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50"
+                          disabled={isBusy}
+                          className="rounded-md border border-red-200 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                          Delete
+                          {isDeleting ? "Deleting..." : "Delete"}
                         </button>
 
                         <button
                           type="button"
                           onClick={() => setIsEditing(true)}
-                          className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90"
+                          disabled={isBusy}
+                          className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Edit
                         </button>
@@ -167,7 +182,8 @@ export default function ItemDrawer({
                         <button
                           type="button"
                           onClick={handleCancel}
-                          className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                          disabled={isBusy}
+                          className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Cancel
                         </button>
@@ -175,9 +191,10 @@ export default function ItemDrawer({
                         <button
                           type="button"
                           onClick={handleSave}
-                          className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90"
+                          disabled={isBusy || isNameEmpty}
+                          className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                          Save
+                          {isSaving ? "Saving..." : "Save"}
                         </button>
                       </div>
                     )}
@@ -189,7 +206,8 @@ export default function ItemDrawer({
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                      disabled={isBusy}
+                      className="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Cancel
                     </button>
@@ -197,9 +215,10 @@ export default function ItemDrawer({
                     <button
                       type="button"
                       onClick={handleSave}
-                      className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90"
+                      disabled={isBusy || isNameEmpty}
+                      className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      Create
+                      {isSaving ? "Creating..." : "Create"}
                     </button>
                   </div>
                 )}
@@ -216,7 +235,8 @@ export default function ItemDrawer({
                       onChange={(e) =>
                         handleFieldChange("name", e.target.value)
                       }
-                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10"
+                      disabled={isBusy}
+                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
                     />
                   ) : (
                     <p className="text-base font-semibold text-slate-900">
@@ -240,7 +260,8 @@ export default function ItemDrawer({
                             e.target.value as Item["status"],
                           )
                         }
-                        className="w-full appearance-none rounded-md border border-slate-300 bg-white px-3 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10"
+                        disabled={isBusy}
+                        className="w-full appearance-none rounded-md border border-slate-300 bg-white px-3 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
                       >
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
@@ -267,7 +288,8 @@ export default function ItemDrawer({
                       onChange={(e) =>
                         handleFieldChange("createdAt", e.target.value)
                       }
-                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10"
+                      disabled={isBusy}
+                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
                     />
                   ) : (
                     <p className="text-sm text-slate-700">
@@ -275,6 +297,10 @@ export default function ItemDrawer({
                     </p>
                   )}
                 </div>
+
+                {isNameEmpty && (isEditing || isCreateMode) && (
+                  <p className="text-sm text-red-600">Name is required.</p>
+                )}
 
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                   <p className="text-sm font-medium text-slate-900">
