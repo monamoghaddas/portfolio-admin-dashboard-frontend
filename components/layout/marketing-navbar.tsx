@@ -1,17 +1,20 @@
 import Link from "next/link";
+import MarketingMobileNav from "@/components/layout/marketing-mobile-nav";
 
 export default function MarketingNavbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex w-full max-w-6xl items-center gap-2 px-4 py-4 sm:gap-3 sm:px-6 md:gap-4">
+        <MarketingMobileNav />
+
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-slate-900"
+          className="min-w-0 flex-1 truncate text-base font-semibold tracking-tight text-slate-900 sm:text-lg md:flex-initial"
         >
           Mona Moghaddas
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-8 md:flex">
           <a
             href="#experience"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f]"
@@ -40,7 +43,7 @@ export default function MarketingNavbar() {
 
         <Link
           href="/dashboard"
-          className="rounded-md bg-[#1e3a5f] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+          className="hidden shrink-0 rounded-md bg-[#1e3a5f] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 md:ml-auto md:inline-flex md:items-center md:justify-center"
         >
           Dashboard
         </Link>

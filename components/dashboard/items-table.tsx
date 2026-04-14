@@ -35,7 +35,8 @@ export default function ItemsTable({
 
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-      <table className="w-full text-sm">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-xl text-sm">
         <thead className="bg-slate-50">
           <tr className="border-b border-slate-200">
             <th className="px-5 py-3 text-left font-semibold text-slate-700">
@@ -107,6 +108,7 @@ export default function ItemsTable({
           })}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
