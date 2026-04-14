@@ -1,37 +1,40 @@
-import { mockItems } from "@/lib/mock/items";
-import { Item } from "@/types/item";
+import type { Item } from "@/types/item";
 
-let itemsDb: Item[] = [...mockItems];
-
-function wait(ms = 300) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+async function parseJson<T>(res: Response): Promise<T> {
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<T>;
 }
 
+/** Client-side fetch to Route Handlers; use only from the browser or `queryFn` / `mutationFn`. */
 export async function getItems(): Promise<Item[]> {
-  await wait();
-  return [...itemsDb];
+  const res = await fetch("/api/items", { cache: "no-store" });
+  return parseJson<Item[]>(res);
 }
 
 export async function createItem(item: Item): Promise<Item> {
-  await wait();
-  itemsDb = [item, ...itemsDb];
-  return item;
+  const res = await fetch("/api/items", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(item),
+  });
+  return parseJson<Item>(res);
 }
 
 export async function updateItem(updatedItem: Item): Promise<Item> {
-  await wait();
-
-  itemsDb = itemsDb.map((item) =>
-    item.id === updatedItem.id ? updatedItem : item,
-  );
-
-  return updatedItem;
+  const res = await fetch(`/api/items/${encodeURIComponent(updatedItem.id)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedItem),
+  });
+  return parseJson<Item>(res);
 }
 
 export async function deleteItem(itemId: string): Promise<{ id: string }> {
-  await wait();
-
-  itemsDb = itemsDb.filter((item) => item.id !== itemId);
-
-  return { id: itemId };
+  const res = await fetch(`/api/items/${encodeURIComponent(itemId)}`, {
+    method: "DELETE",
+  });
+  return parseJson<{ id: string }>(res);
 }

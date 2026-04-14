@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Mona Moghaddas — Senior Front-End Engineer",
+  description:
+    "Portfolio and interactive admin dashboard demo: React, TypeScript, Next.js, TanStack Query, and modern UI patterns.",
+  openGraph: {
+    title: "Mona Moghaddas — Senior Front-End Engineer",
+    description:
+      "9+ years building scalable interfaces; featured work and live dashboard demo.",
+  },
+};
 
 const featuredProjects = [
   {

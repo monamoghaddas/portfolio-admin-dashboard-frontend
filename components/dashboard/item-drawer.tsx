@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import StatusBadge from "@/components/ui/status-badge";
 import { Item } from "@/types/item";
 
 type ItemDrawerProps = {
@@ -20,6 +21,9 @@ type FormValues = {
   createdAt: string;
 };
 
+const FOCUSABLE_SELECTOR =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 function getFormValues(item: Item | null, isCreateMode: boolean): FormValues {
   if (isCreateMode) {
     return {
@@ -36,22 +40,6 @@ function getFormValues(item: Item | null, isCreateMode: boolean): FormValues {
   };
 }
 
-function StatusBadge({ status }: { status: Item["status"] }) {
-  const isActive = status === "active";
-
-  return (
-    <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
-        isActive
-          ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
-          : "bg-slate-100 text-slate-600 ring-1 ring-slate-200"
-      }`}
-    >
-      {isActive ? "Active" : "Inactive"}
-    </span>
-  );
-}
-
 export default function ItemDrawer({
   item,
   isOpen,
@@ -62,6 +50,12 @@ export default function ItemDrawer({
   onSave,
   onDelete,
 }: ItemDrawerProps) {
+  const titleId = useId();
+  const subtitleId = useId();
+  const panelRef = useRef<HTMLElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+
   const [isEditing, setIsEditing] = useState(isCreateMode);
   const [formValues, setFormValues] = useState<FormValues>(() =>
     getFormValues(item, isCreateMode),
@@ -69,6 +63,59 @@ export default function ItemDrawer({
 
   const isBusy = isSaving || isDeleting;
   const isNameEmpty = !formValues.name.trim();
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
+    const id = requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape" && !isBusy) {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+
+      if (e.key !== "Tab" || !panelRef.current) return;
+
+      const list = [
+        ...panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      ];
+      if (!list.length) return;
+
+      const first = list[0];
+      const last = list[list.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey) {
+        if (active === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      cancelAnimationFrame(id);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen, isBusy, onClose]);
+
+  useEffect(() => {
+    if (isOpen) return;
+    const el = returnFocusRef.current;
+    if (el && typeof el.focus === "function" && document.body.contains(el)) {
+      el.focus();
+    }
+    returnFocusRef.current = null;
+  }, [isOpen]);
 
   function handleFieldChange<K extends keyof FormValues>(
     field: K,
@@ -117,8 +164,11 @@ export default function ItemDrawer({
 
   return (
     <>
-      <div
+      <button
+        type="button"
+        aria-label="Close panel"
         onClick={isBusy ? undefined : onClose}
+        tabIndex={-1}
         className={`fixed inset-0 z-40 bg-slate-900/30 transition-opacity ${
           isOpen
             ? "pointer-events-auto opacity-100"
@@ -127,6 +177,13 @@ export default function ItemDrawer({
       />
 
       <aside
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={subtitleId}
+        aria-hidden={!isOpen}
+        inert={!isOpen ? true : undefined}
         className={`fixed top-14 right-0 z-50 h-[calc(100vh-56px)] w-full max-w-md transform border-l border-slate-200 bg-white shadow-xl transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -134,17 +191,23 @@ export default function ItemDrawer({
         <div className="flex h-full flex-col">
           <div className="flex items-start justify-between border-b border-slate-200 px-6 py-4">
             <div>
-              <p className="text-sm font-semibold text-slate-900">{title}</p>
-              <p className="mt-1 text-xs text-slate-500">{subtitle}</p>
+              <p id={titleId} className="text-sm font-semibold text-slate-900">
+                {title}
+              </p>
+              <p id={subtitleId} className="mt-1 text-xs text-slate-500">
+                {subtitle}
+              </p>
             </div>
 
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={onClose}
               disabled={isBusy}
+              aria-label="Close item panel"
               className="rounded-md px-2 py-1 text-sm text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              ✕
+              <span aria-hidden>×</span>
             </button>
           </div>
 
@@ -172,7 +235,7 @@ export default function ItemDrawer({
                           type="button"
                           onClick={() => setIsEditing(true)}
                           disabled={isBusy}
-                          className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="rounded-md bg-[var(--primary)] px-3 py-2 text-sm font-medium text-[var(--primary-foreground)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           Edit
                         </button>
@@ -192,7 +255,7 @@ export default function ItemDrawer({
                           type="button"
                           onClick={handleSave}
                           disabled={isBusy || isNameEmpty}
-                          className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="rounded-md bg-[var(--primary)] px-3 py-2 text-sm font-medium text-[var(--primary-foreground)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {isSaving ? "Saving..." : "Save"}
                         </button>
@@ -216,7 +279,7 @@ export default function ItemDrawer({
                       type="button"
                       onClick={handleSave}
                       disabled={isBusy || isNameEmpty}
-                      className="rounded-md bg-[#1e3a5f] px-3 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="rounded-md bg-[var(--primary)] px-3 py-2 text-sm font-medium text-[var(--primary-foreground)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {isSaving ? "Creating..." : "Create"}
                     </button>
@@ -236,7 +299,7 @@ export default function ItemDrawer({
                         handleFieldChange("name", e.target.value)
                       }
                       disabled={isBusy}
-                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
+                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
                     />
                   ) : (
                     <p className="text-base font-semibold text-slate-900">
@@ -261,14 +324,16 @@ export default function ItemDrawer({
                           )
                         }
                         disabled={isBusy}
-                        className="w-full appearance-none rounded-md border border-slate-300 bg-white px-3 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
+                        className="w-full appearance-none rounded-md border border-slate-300 bg-white px-3 py-2 pr-10 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
                       >
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                       </select>
 
                       <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
-                        <span className="text-xs">▾</span>
+                        <span className="text-xs" aria-hidden>
+                          {"\u25be"}
+                        </span>
                       </div>
                     </div>
                   ) : (
@@ -289,7 +354,7 @@ export default function ItemDrawer({
                         handleFieldChange("createdAt", e.target.value)
                       }
                       disabled={isBusy}
-                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
+                      className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/10 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:opacity-70"
                     />
                   ) : (
                     <p className="text-sm text-slate-700">

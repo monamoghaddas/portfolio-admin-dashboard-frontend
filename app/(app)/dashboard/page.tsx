@@ -8,7 +8,7 @@ import {
   useCreateItem,
   useDeleteItem,
   useUpdateItem,
-} from "@/hooks/use-item-mutation";
+} from "@/hooks/use-item-mutations";
 import { useItems } from "@/hooks/useItems";
 import { Item } from "@/types/item";
 

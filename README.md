@@ -1,6 +1,8 @@
 # Portfolio admin dashboard (frontend)
 
-Personal portfolio site with a **marketing home** and an **interactive admin-style demo**. The demo showcases React Query, CRUD-style flows, a drawer pattern, filtering, and toast feedback—backed by a small **in-memory** API (no real database).
+Personal portfolio site with a **marketing home** and an **interactive admin-style demo**. The demo showcases React Query, CRUD-style flows, a drawer pattern, filtering, and toast feedback. The browser calls **Route Handlers** under `app/api/items/`, which read and write an **in-memory store** in `lib/server/items-store.ts` (no real database).
+
+**Deployed / serverless note:** each function instance keeps its own memory, so item changes may **not persist** across cold starts or between regions. Treat CRUD as a live UI demo; swap the store for a database when you need durable data.
 
 ## Run locally
 

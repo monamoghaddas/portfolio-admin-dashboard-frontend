@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_GITHUB_URL } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Engineering notes",
+  description:
+    "How this portfolio repo is structured: App Router, React Query, Route Handlers, and the in-memory items demo.",
+  openGraph: {
+    title: "Engineering notes — Portfolio",
+    description:
+      "Stack, folder map, and data flow for the portfolio admin dashboard frontend.",
+  },
+};
 
 const stack = [
   "Next.js (App Router)",
@@ -28,8 +40,16 @@ const structure = [
     note: "React Query hooks wrapping list and mutation calls.",
   },
   {
+    path: "app/api/items/",
+    note: "Route Handlers: GET/POST collection, PATCH/DELETE by id.",
+  },
+  {
+    path: "lib/server/items-store.ts",
+    note: "In-memory store + simulated latency; not durable on serverless (see README).",
+  },
+  {
     path: "lib/api/items.ts",
-    note: "Async in-memory store with simulated latency (demo-only backend).",
+    note: "Client fetch helpers that call the items API from React Query.",
   },
 ];
 
@@ -45,12 +65,13 @@ export default function EngineeringPage() {
         </h1>
         <p className="mt-4 text-base leading-7 text-slate-600">
           The interactive demo reads and writes through React Query hooks. Those
-          hooks call functions in{" "}
+          hooks call{" "}
           <code className="rounded bg-slate-200/80 px-1.5 py-0.5 text-sm text-slate-800">
             lib/api/items.ts
           </code>
-          , which keeps an in-memory array so you can try create, update, and
-          delete without a real server.
+          , which issues HTTP requests to Next.js Route Handlers. The handlers
+          use an in-memory store so you can try create, update, and delete
+          without provisioning a database (see README for deployment limits).
         </p>
 
         <section className="mt-10 space-y-3">

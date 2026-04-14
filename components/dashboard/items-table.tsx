@@ -1,3 +1,5 @@
+import type { KeyboardEvent } from "react";
+import StatusBadge from "@/components/ui/status-badge";
 import { Item } from "@/types/item";
 
 type ItemsTableProps = {
@@ -7,22 +9,6 @@ type ItemsTableProps = {
   /** When true, rows are not clickable and selection styling is hidden. */
   readOnly?: boolean;
 };
-
-function StatusBadge({ status }: { status: Item["status"] }) {
-  const isActive = status === "active";
-
-  return (
-    <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
-        isActive
-          ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
-          : "bg-slate-100 text-slate-600 ring-1 ring-slate-200"
-      }`}
-    >
-      {isActive ? "Active" : "Inactive"}
-    </span>
-  );
-}
 
 export default function ItemsTable({
   items = [],
@@ -68,20 +54,44 @@ export default function ItemsTable({
           {items.map((item) => {
             const isSelected = !readOnly && item.id === selectedItemId;
 
+            function activateRow() {
+              if (!readOnly) onRowClick?.(item);
+            }
+
+            function onRowKeyDown(e: KeyboardEvent<HTMLTableRowElement>) {
+              if (readOnly) return;
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                activateRow();
+              }
+            }
+
             return (
               <tr
                 key={item.id}
-                onClick={readOnly ? undefined : () => onRowClick?.(item)}
+                tabIndex={readOnly ? undefined : 0}
+                role={readOnly ? undefined : "button"}
+                aria-label={
+                  readOnly
+                    ? undefined
+                    : `Open details for ${item.name}, ${item.status}`
+                }
+                aria-pressed={readOnly ? undefined : isSelected}
+                onClick={readOnly ? undefined : activateRow}
+                onKeyDown={readOnly ? undefined : onRowKeyDown}
                 className={`border-b border-slate-100 transition-colors last:border-b-0 ${
                   readOnly
                     ? "cursor-default hover:bg-slate-50/80"
-                    : `cursor-pointer ${isSelected ? "bg-[#1e3a5f]/[0.06]" : "hover:bg-slate-50"}`
+                    : `cursor-pointer outline-none focus-visible:bg-slate-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--primary)]/30 ${isSelected ? "bg-[var(--primary)]/[0.06]" : "hover:bg-slate-50"}`
                 }`}
               >
                 <td className="px-5 py-4 font-medium text-slate-900">
                   <div className="flex items-center gap-3">
                     {isSelected && (
-                      <span className="h-2 w-2 rounded-full bg-[#1e3a5f]" />
+                      <span
+                        className="h-2 w-2 rounded-full bg-[var(--primary)]"
+                        aria-hidden
+                      />
                     )}
                     <span>{item.name}</span>
                   </div>
