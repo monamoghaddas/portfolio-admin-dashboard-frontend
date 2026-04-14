@@ -11,6 +11,8 @@ const SECTION_LINKS = [
   { href: "#contact", label: "Contact" },
 ] as const;
 
+const PAGE_LINKS = [{ href: "/building-with-ai", label: "How I built this" }] as const;
+
 export default function MarketingMobileNav() {
   const [open, setOpen] = useState(false);
   const panelId = useId();
@@ -64,6 +66,16 @@ export default function MarketingMobileNav() {
               >
                 {item.label}
               </a>
+            ))}
+            {PAGE_LINKS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
           <div className="border-t border-slate-200 p-4">

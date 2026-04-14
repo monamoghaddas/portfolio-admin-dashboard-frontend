@@ -19,12 +19,21 @@ const featuredProjects = [
     description:
       "A modern dashboard built with Next.js, TypeScript, Tailwind, and React Query. Includes filtering, drawer workflows, CRUD interactions, and scalable UI architecture.",
     href: "/dashboard",
+    cta: "Open project",
   },
   {
     title: "Engineering notes",
     description:
       "How this repo is structured: App Router layouts, data layer, React Query hooks, and the in-memory demo API that powers the UI.",
     href: "/engineering",
+    cta: "Open project",
+  },
+  {
+    title: "How I built this",
+    description:
+      "A first-person story: building the portfolio with Cursor and AI—what worked, honest risks, and why the stack fits the workflow.",
+    href: "/building-with-ai",
+    cta: "Read story",
   },
 ];
 
@@ -165,7 +174,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project) => (
             <div
               key={project.title}
@@ -182,7 +191,7 @@ export default function HomePage() {
                   href={project.href}
                   className="inline-flex items-center text-sm font-medium text-[#1e3a5f] hover:underline"
                 >
-                  Open project
+                  {project.cta}
                 </Link>
               </div>
             </div>

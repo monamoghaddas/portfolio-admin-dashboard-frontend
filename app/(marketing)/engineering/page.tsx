@@ -112,6 +112,18 @@ export default function EngineeringPage() {
           </p>
         </section>
 
+        <p className="mt-10 text-sm leading-7 text-slate-600">
+          Curious how this repo came together day to day—including the AI-assisted
+          parts? Read{" "}
+          <Link
+            href="/building-with-ai"
+            className="font-medium text-[#1e3a5f] underline-offset-2 hover:underline"
+          >
+            Building this portfolio with AI and Cursor
+          </Link>
+          .
+        </p>
+
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/"

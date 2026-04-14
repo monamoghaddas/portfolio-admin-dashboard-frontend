@@ -27,6 +27,12 @@ export default function MarketingNavbar() {
           >
             Projects
           </a>
+          <Link
+            href="/building-with-ai"
+            className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f]"
+          >
+            How I built this
+          </Link>
           <a
             href="#skills"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f]"
