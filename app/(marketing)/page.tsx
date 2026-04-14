@@ -114,7 +114,7 @@ export default function HomePage() {
               modern design systems.
             </p>
 
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <div className="flex flex-col flex-wrap gap-3 pt-2 sm:flex-row">
               <Link
                 href="/dashboard"
                 className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
@@ -127,6 +127,14 @@ export default function HomePage() {
                 className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
               >
                 View Experience
+              </a>
+
+              <a
+                href="/resume.pdf"
+                download="Mona-Moghaddas-Resume.pdf"
+                className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+              >
+                Download Resume
               </a>
             </div>
           </div>
