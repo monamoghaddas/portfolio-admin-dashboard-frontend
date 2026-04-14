@@ -16,14 +16,66 @@ const featuredProjects = [
   },
 ];
 
+const experience = [
+  {
+    company: "Control Gap Inc.",
+    role: "Senior Front-End Developer",
+    period: "Apr 2022 - Present",
+    location: "Ontario, CA (Remote)",
+    highlights: [
+      "Lead front-end architecture for enterprise React + TypeScript applications.",
+      "Built a shared KendoReact component library to standardize UI across products.",
+      "Improved performance with lazy loading, memoization, and code splitting, reducing bundle size by 25%.",
+      "Mentor developers on TypeScript, React Query, and scalable UI patterns.",
+    ],
+  },
+  {
+    company: "Monark Group",
+    role: "Front-End Developer",
+    period: "May 2020 - May 2022",
+    location: "Surrey, CA (Hybrid)",
+    highlights: [
+      "Developed and maintained e-commerce and prescription ordering products.",
+      "Created reusable Material UI components and improved delivery speed by 30%.",
+      "Integrated Storyblok CMS to let non-technical teams manage content.",
+    ],
+  },
+  {
+    company: "Kater (Monark Group)",
+    role: "Front-End Developer",
+    period: "Sep 2019 - Jan 2020",
+    location: "Surrey, CA (Hybrid)",
+    highlights: [
+      "Engineered reusable form components and custom hooks for onboarding workflows.",
+      "Managed complex UI state with Redux and Redux-Saga for predictable data flow.",
+      "Built responsive interfaces with Bootstrap, CSS variables, and media queries.",
+    ],
+  },
+  {
+    company: "Planbox",
+    role: "Front-End Developer",
+    period: "Oct 2015 - Feb 2018",
+    location: "Montreal, CA (On-Site)",
+    highlights: [
+      "Refactored enterprise React apps to improve reusability and rendering performance.",
+      "Implemented responsive Sass architecture and cross-browser UI consistency.",
+      "Collaborated with QA and R&D to stabilize releases and reduce frontend defects.",
+    ],
+  },
+];
+
 const skills = [
   "React",
   "Next.js",
   "TypeScript",
+  "JavaScript (ES6+)",
   "Tailwind CSS",
   "React Query",
   "KendoReact",
+  "Material UI",
   "Redux",
+  "Storybook",
+  "Jest / RTL / Vitest",
   "UI Architecture",
   "Design Systems",
   "Responsive UI",
@@ -40,14 +92,14 @@ export default function HomePage() {
             </p>
 
             <h1 className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-              Building scalable, polished, and product-focused frontend
-              experiences.
+              Senior Front-End Engineer building scalable, high-performance user
+              interfaces.
             </h1>
 
             <p className="max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-              I’m a frontend engineer focused on React, TypeScript, design
-              systems, and data-driven user interfaces. I build clean, reusable,
-              and production-style applications with strong UX fundamentals.
+              9+ years of experience across enterprise dashboards, e-commerce,
+              and data-heavy products using React, TypeScript, Next.js, and
+              modern design systems.
             </p>
 
             <div className="flex flex-col gap-3 pt-2 sm:flex-row">
@@ -59,10 +111,10 @@ export default function HomePage() {
               </Link>
 
               <a
-                href="#projects"
+                href="#experience"
                 className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
               >
-                Explore Work
+                View Experience
               </a>
             </div>
           </div>
@@ -114,6 +166,47 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="experience" className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-8 space-y-2">
+          <h2 className="text-2xl font-semibold text-slate-900">
+            Professional Experience
+          </h2>
+          <p className="text-sm text-slate-500">
+            Roles focused on frontend architecture, reusable component systems,
+            and high-quality product delivery.
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          {experience.map((item) => (
+            <article
+              key={`${item.company}-${item.period}`}
+              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+            >
+              <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900">
+                    {item.role}
+                  </h3>
+                  <p className="text-sm font-medium text-[#1e3a5f]">
+                    {item.company}
+                  </p>
+                </div>
+                <div className="text-sm text-slate-500 md:text-right">
+                  <p>{item.period}</p>
+                  <p>{item.location}</p>
+                </div>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-600">
+                {item.highlights.map((highlight) => (
+                  <li key={highlight}>- {highlight}</li>
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
       </section>
@@ -184,7 +277,8 @@ export default function HomePage() {
             </h2>
             <p className="text-sm leading-6 text-slate-200">
               I enjoy building modern frontend applications with strong
-              architecture, thoughtful UX, and scalable component systems.
+              architecture, thoughtful UX, and scalable component systems. Open
+              to senior frontend opportunities.
             </p>
             <div className="flex flex-col gap-3 pt-2 sm:flex-row">
               <Link
@@ -193,6 +287,20 @@ export default function HomePage() {
               >
                 Open Dashboard
               </Link>
+              <a
+                href="mailto:moghaddas.mona@gmail.com"
+                className="inline-flex items-center justify-center rounded-md border border-white/30 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+              >
+                Email Me
+              </a>
+              <a
+                href="https://linkedin.com/in/mona-moghaddas-0a05696b/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-md border border-white/30 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
         </div>

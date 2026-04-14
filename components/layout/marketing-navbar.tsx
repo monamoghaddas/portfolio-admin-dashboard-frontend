@@ -13,6 +13,12 @@ export default function MarketingNavbar() {
 
         <nav className="hidden items-center gap-8 md:flex">
           <a
+            href="#experience"
+            className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f]"
+          >
+            Experience
+          </a>
+          <a
             href="#projects"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f]"
           >
