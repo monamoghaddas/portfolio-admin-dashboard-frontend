@@ -85,18 +85,18 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#f7f8fa]">
       <section className="border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,rgba(30,58,95,0.18),transparent_50%),linear-gradient(to_bottom_right,#f1f5f9,#e0e7ff,#c7d2fe)]">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
           <div className="space-y-6">
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#1e3a5f]">
               Frontend Engineer Portfolio
             </p>
 
-            <h1 className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl">
+            <h1 className="max-w-none text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl">
               Senior Front-End Engineer building scalable, high-performance user
               interfaces.
             </h1>
 
-            <p className="max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+            <p className="max-w-none text-base leading-7 text-slate-600 md:text-lg">
               9+ years of experience across enterprise dashboards, e-commerce,
               and data-heavy products using React, TypeScript, Next.js, and
               modern design systems.
