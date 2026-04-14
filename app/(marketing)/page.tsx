@@ -120,7 +120,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex justify-center lg:justify-end">
-            <div className="relative h-[420px] w-[320px] overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-xl">
+            <div className="relative h-[320px] w-[320px] overflow-hidden rounded-full border border-slate-200 bg-slate-100 shadow-xl">
               <Image
                 src="/images/mona.jpg"
                 alt="Mona Moghaddas"
