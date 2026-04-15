@@ -4,6 +4,7 @@ import "./globals.css";
 import ReactQueryProvider from "@/lib/react-query/provider";
 import { Toaster } from "sonner";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
+import GaDebugIndicator from "@/components/analytics/ga-debug-indicator";
 
 const fontSans = DM_Sans({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const isDevelopment = process.env.NODE_ENV === "development";
 
   return (
     <html
@@ -36,6 +38,7 @@ export default function RootLayout({
     >
       <body>
         <ReactQueryProvider>
+          <GaDebugIndicator gaId={gaId} isDevelopment={isDevelopment} />
           {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
           {children}
           <Toaster position="top-right" richColors />
