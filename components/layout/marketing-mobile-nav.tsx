@@ -5,10 +5,10 @@ import { createPortal } from "react-dom";
 import { useEffect, useId, useMemo, useState } from "react";
 
 const SECTION_LINKS = [
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#contact", label: "Contact" },
 ] as const;
 
 const PAGE_LINKS = [{ href: "/building-with-ai", label: "How I built this" }] as const;
@@ -89,7 +89,7 @@ export default function MarketingMobileNav() {
               className="flex items-center justify-center rounded-md bg-[#1e3a5f] px-4 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2"
               onClick={() => setOpen(false)}
             >
-              Dashboard
+              Live Demo
             </Link>
           </div>
         </nav>

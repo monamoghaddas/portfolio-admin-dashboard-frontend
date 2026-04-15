@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/marketing/section-heading";
+import { SITE_GITHUB_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Mona Moghaddas — Senior Front-End Engineer",
@@ -26,24 +27,24 @@ const featuredProjects: FeaturedProject[] = [
   {
     title: "Portfolio Admin Dashboard",
     description:
-      "A modern dashboard built with Next.js, TypeScript, Tailwind, and React Query. Includes filtering, drawer workflows, CRUD interactions, and scalable UI architecture.",
+      "Built to mirror real product workflows: role-friendly dashboard navigation, CRUD flows, and responsive states with measurable UX consistency across screens.",
     href: "/dashboard",
-    cta: "Open project",
+    cta: "See Live Demo",
     primary: true,
   },
   {
     title: "Engineering notes",
     description:
-      "How this repo is structured: App Router layouts, data layer, React Query hooks, and the in-memory demo API that powers the UI.",
+      "A concise architecture walkthrough that explains structure decisions, data flow, and tradeoffs so teams can quickly assess maintainability.",
     href: "/engineering",
-    cta: "Open project",
+    cta: "Review architecture",
   },
   {
     title: "How I built this",
     description:
-      "A first-person story: building the portfolio with Cursor and AI—what worked, honest risks, and why the stack fits the workflow.",
+      "A practical write-up of AI-assisted delivery: quality controls, review habits, and how I keep speed high without compromising reliability.",
     href: "/building-with-ai",
-    cta: "Read story",
+    cta: "Read workflow notes",
   },
 ];
 
@@ -52,7 +53,8 @@ const experience = [
     company: "Control Gap Inc.",
     role: "Senior Front-End Developer",
     period: "Apr 2022 - Present",
-    location: "Ontario, CA (Remote)",
+    location: "Ontario, Canada (Remote)",
+    scope: "Enterprise security and compliance products",
     highlights: [
       "Lead front-end architecture for enterprise React + TypeScript applications.",
       "Built a shared KendoReact component library to standardize UI across products.",
@@ -64,7 +66,8 @@ const experience = [
     company: "Monark Group",
     role: "Front-End Developer",
     period: "May 2020 - May 2022",
-    location: "Surrey, CA (Hybrid)",
+    location: "Surrey, Canada (Hybrid)",
+    scope: "E-commerce and prescription ordering platforms",
     highlights: [
       "Developed and maintained e-commerce and prescription ordering products.",
       "Created reusable Material UI components and improved delivery speed by 30%.",
@@ -75,7 +78,8 @@ const experience = [
     company: "Kater (Monark Group)",
     role: "Front-End Developer",
     period: "Sep 2019 - Jan 2020",
-    location: "Surrey, CA (Hybrid)",
+    location: "Surrey, Canada (Hybrid)",
+    scope: "Digital onboarding and form-heavy product flows",
     highlights: [
       "Engineered reusable form components and custom hooks for onboarding workflows.",
       "Managed complex UI state with Redux and Redux-Saga for predictable data flow.",
@@ -86,7 +90,8 @@ const experience = [
     company: "Planbox",
     role: "Front-End Developer",
     period: "Oct 2015 - Feb 2018",
-    location: "Montreal, CA (On-Site)",
+    location: "Montreal, Canada (On-Site)",
+    scope: "Enterprise collaboration and innovation software",
     highlights: [
       "Refactored enterprise React apps to improve reusability and rendering performance.",
       "Implemented responsive Sass architecture and cross-browser UI consistency.",
@@ -130,20 +135,20 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto grid max-w-6xl gap-8 px-6 py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center lg:gap-12">
           <div className="space-y-6 lg:col-start-1 lg:row-start-1">
             <h1 className="marketing-fade-up marketing-fade-up-delay font-display max-w-none text-4xl font-semibold leading-[1.12] tracking-tight text-slate-900 md:text-5xl md:leading-[1.1]">
-              Senior Front-End Engineer building scalable, high-performance user
-              interfaces.
+              Senior Front-End Engineer delivering scalable product experiences
+              for enterprise and e-commerce teams.
             </h1>
 
             <p className="marketing-fade-up marketing-fade-up-delay-2 max-w-none text-base leading-[1.75] text-slate-600 md:text-lg md:leading-[1.7]">
-              9+ years of experience across enterprise dashboards, e-commerce,
-              and data-heavy products using React, TypeScript, Next.js, and
-              modern design systems.
+              9+ years shipping React and Next.js applications with stronger UI
+              consistency, faster delivery cycles, and measurable frontend
+              performance gains.
             </p>
           </div>
 
           <div className="flex justify-center lg:col-start-2 lg:row-span-2 lg:justify-end">
             <div
-              className={`relative rounded-full bg-gradient-to-br from-[#1e3a5f]/35 via-indigo-300/50 to-slate-100 p-[3px] shadow-[0_25px_60px_-15px_rgba(30,58,95,0.35)] ring-4 ring-white/90 ${cardTransition} motion-reduce:hover:translate-y-0`}
+              className={`relative rounded-full bg-linear-to-br from-[#1e3a5f]/35 via-indigo-300/50 to-slate-100 p-[3px] shadow-[0_25px_60px_-15px_rgba(30,58,95,0.35)] ring-4 ring-white/90 ${cardTransition} motion-reduce:hover:translate-y-0`}
             >
               <div className="relative h-[314px] w-[314px] overflow-hidden rounded-full bg-slate-100 shadow-inner sm:h-[320px] sm:w-[320px]">
                 <Image
@@ -167,15 +172,8 @@ export default function HomePage() {
               data-ga-location="hero"
               className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
             >
-              View Project
+              See Live Demo
             </Link>
-
-            <a
-              href="#experience"
-              className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
-            >
-              View Experience
-            </a>
 
             <a
               href="/resume.pdf"
@@ -186,8 +184,42 @@ export default function HomePage() {
               data-ga-location="hero"
               className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
             >
-              Download Resume
+              Download Resume (PDF)
             </a>
+          </div>
+
+          <div className="marketing-fade-up marketing-fade-up-delay-2 rounded-xl border border-white/70 bg-white/75 p-4 backdrop-blur-sm lg:col-start-1 lg:row-start-3">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium uppercase tracking-[0.12em] text-slate-600">
+              <span>9+ years experience</span>
+              <span>25% bundle reduction</span>
+              <span>30% faster delivery</span>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-3 text-sm">
+              <a
+                href="/resume.pdf"
+                className="font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline"
+              >
+                Resume
+              </a>
+              <a
+                href="https://linkedin.com/in/mona-moghaddas-0a05696b/"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline"
+              >
+                LinkedIn
+              </a>
+              {SITE_GITHUB_URL ? (
+                <a
+                  href={SITE_GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline"
+                >
+                  GitHub
+                </a>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>
@@ -226,7 +258,7 @@ export default function HomePage() {
               return (
                 <div
                   key={project.title}
-                  className={`group relative rounded-2xl bg-gradient-to-br from-[#1e3a5f]/35 via-indigo-400/25 to-slate-200/80 p-px shadow-sm ${cardTransition} hover:-translate-y-1 hover:shadow-xl focus-within:-translate-y-1 focus-within:shadow-xl motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0`}
+                  className={`group relative rounded-2xl bg-linear-to-br from-[#1e3a5f]/35 via-indigo-400/25 to-slate-200/80 p-px shadow-sm ${cardTransition} hover:-translate-y-1 hover:shadow-xl focus-within:-translate-y-1 focus-within:shadow-xl motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0`}
                 >
                   <div
                     className={`h-full rounded-[calc(1rem-1px)] border border-transparent bg-white p-6 ${cardTransition} group-hover:border-slate-200/80`}
@@ -268,6 +300,9 @@ export default function HomePage() {
                   </h3>
                   <p className="text-sm font-medium text-[#1e3a5f]">
                     {item.company}
+                  </p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.08em] text-slate-500">
+                    Scope: {item.scope}
                   </p>
                 </div>
                 <div className="text-sm text-slate-500 md:text-right">
@@ -371,12 +406,22 @@ export default function HomePage() {
                 href="/dashboard"
                 data-ga-event="cta_dashboard_click"
                 data-ga-category="portfolio_cta"
-                data-ga-label="Open Dashboard"
+                data-ga-label="See Live Demo"
                 data-ga-location="contact"
                 className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-medium text-[#1e3a5f] shadow-sm transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
               >
-                Open Dashboard
+                See Live Demo
               </Link>
+              <a
+                href="mailto:moghaddas.mona@gmail.com?subject=Schedule%20a%2020-minute%20intro%20call"
+                data-ga-event="cta_schedule_call_click"
+                data-ga-category="portfolio_cta"
+                data-ga-label="Schedule intro call"
+                data-ga-location="contact"
+                className="inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
+              >
+                Schedule Intro Call
+              </a>
               <a
                 href="mailto:moghaddas.mona@gmail.com"
                 data-ga-event="cta_email_click"

@@ -16,13 +16,13 @@ export default function MarketingNavbar() {
 
         <nav className="hidden flex-1 items-center justify-center gap-8 md:flex">
           <a
-            href="#experience"
+            href="/#experience"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f] focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Experience
           </a>
           <a
-            href="#projects"
+            href="/#projects"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f] focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Projects
@@ -34,13 +34,13 @@ export default function MarketingNavbar() {
             How I built this
           </Link>
           <a
-            href="#skills"
+            href="/#skills"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f] focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Skills
           </a>
           <a
-            href="#contact"
+            href="/#contact"
             className="text-sm font-medium text-slate-600 transition hover:text-[#1e3a5f] focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Contact
@@ -51,7 +51,7 @@ export default function MarketingNavbar() {
           href="/dashboard"
           className="hidden shrink-0 rounded-md bg-[#1e3a5f] px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/50 focus-visible:ring-offset-2 motion-reduce:transition-none md:ml-auto md:inline-flex md:items-center md:justify-center"
         >
-          Dashboard
+          Live Demo
         </Link>
       </div>
     </header>

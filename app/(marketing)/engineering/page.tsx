@@ -144,11 +144,11 @@ export default function EngineeringPage() {
             href="/dashboard"
             data-ga-event="engineering_nav_click"
             data-ga-category="portfolio_navigation"
-            data-ga-label="Open dashboard"
+            data-ga-label="See Live Demo"
             data-ga-location="engineering_footer"
             className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
-            Open dashboard
+            See Live Demo
           </Link>
           {SITE_GITHUB_URL ? (
             <a

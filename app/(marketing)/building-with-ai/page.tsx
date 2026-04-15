@@ -53,6 +53,30 @@ export default function BuildingWithAiPage() {
 
       <article className="mx-auto max-w-3xl px-6 pb-16 pt-12">
         <div className="space-y-10 text-base leading-7 text-slate-600">
+          <section className="rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
+              TL;DR for recruiters
+            </h2>
+            <ul className="mt-3 list-inside list-disc space-y-2 text-sm leading-6 text-slate-600">
+              <li>
+                Built a dual-surface portfolio: marketing site plus interactive
+                dashboard demo to show both communication and execution.
+              </li>
+              <li>
+                Kept quality gates in place: TypeScript constraints, lint checks,
+                focused tests, and review-first diffs before merging.
+              </li>
+              <li>
+                Used AI as delivery leverage while retaining architecture
+                ownership, UX decisions, and release accountability.
+              </li>
+              <li>
+                Optimized for maintainable patterns (App Router boundaries,
+                React Query data flow, reusable UI composition).
+              </li>
+            </ul>
+          </section>
+
           <section className="space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               Why this site exists (the honest version)
@@ -262,11 +286,11 @@ export default function BuildingWithAiPage() {
             href="/dashboard"
             data-ga-event="building_with_ai_nav_click"
             data-ga-category="portfolio_navigation"
-            data-ga-label="Open dashboard"
+            data-ga-label="See Live Demo"
             data-ga-location="building_with_ai_footer"
             className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
-            Open dashboard
+            See Live Demo
           </Link>
         </div>
       </article>
