@@ -127,12 +127,8 @@ export default function HomePage() {
           className="marketing-hero-glow pointer-events-none absolute -right-24 -top-28 h-[min(55vw,28rem)] w-[min(55vw,28rem)] rounded-full bg-indigo-400/25 blur-3xl motion-reduce:animate-none"
           aria-hidden
         />
-        <div className="relative z-10 mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
-          <div className="space-y-6">
-            <p className="marketing-fade-up text-sm font-medium uppercase tracking-[0.2em] text-[#1e3a5f]">
-              Frontend Engineer Portfolio
-            </p>
-
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-8 px-6 py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center lg:gap-12">
+          <div className="space-y-6 lg:col-start-1 lg:row-start-1">
             <h1 className="marketing-fade-up marketing-fade-up-delay font-display max-w-none text-4xl font-semibold leading-[1.12] tracking-tight text-slate-900 md:text-5xl md:leading-[1.1]">
               Senior Front-End Engineer building scalable, high-performance user
               interfaces.
@@ -143,41 +139,9 @@ export default function HomePage() {
               and data-heavy products using React, TypeScript, Next.js, and
               modern design systems.
             </p>
-
-            <div className="marketing-fade-up marketing-fade-up-delay-2 flex flex-col flex-wrap gap-3 pt-2 sm:flex-row">
-              <Link
-                href="/dashboard"
-                data-ga-event="cta_dashboard_click"
-                data-ga-category="portfolio_cta"
-                data-ga-label="View Project"
-                data-ga-location="hero"
-                className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
-              >
-                View Project
-              </Link>
-
-              <a
-                href="#experience"
-                className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
-              >
-                View Experience
-              </a>
-
-              <a
-                href="/resume.pdf"
-                download="Mona-Moghaddas-Resume.pdf"
-                data-ga-event="cta_resume_download_click"
-                data-ga-category="portfolio_cta"
-                data-ga-label="Download Resume"
-                data-ga-location="hero"
-                className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
-              >
-                Download Resume
-              </a>
-            </div>
           </div>
 
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:col-start-2 lg:row-span-2 lg:justify-end">
             <div
               className={`relative rounded-full bg-gradient-to-br from-[#1e3a5f]/35 via-indigo-300/50 to-slate-100 p-[3px] shadow-[0_25px_60px_-15px_rgba(30,58,95,0.35)] ring-4 ring-white/90 ${cardTransition} motion-reduce:hover:translate-y-0`}
             >
@@ -192,6 +156,38 @@ export default function HomePage() {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="marketing-fade-up marketing-fade-up-delay-2 flex flex-col flex-wrap gap-3 pt-2 sm:flex-row lg:col-start-1 lg:row-start-2">
+            <Link
+              href="/dashboard"
+              data-ga-event="cta_dashboard_click"
+              data-ga-category="portfolio_cta"
+              data-ga-label="View Project"
+              data-ga-location="hero"
+              className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
+            >
+              View Project
+            </Link>
+
+            <a
+              href="#experience"
+              className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
+            >
+              View Experience
+            </a>
+
+            <a
+              href="/resume.pdf"
+              download="Mona-Moghaddas-Resume.pdf"
+              data-ga-event="cta_resume_download_click"
+              data-ga-category="portfolio_cta"
+              data-ga-label="Download Resume"
+              data-ga-location="hero"
+              className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
+            >
+              Download Resume
+            </a>
           </div>
         </div>
       </section>
