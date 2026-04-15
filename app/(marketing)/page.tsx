@@ -59,7 +59,7 @@ const experience = [
       "Lead front-end architecture for enterprise React + TypeScript applications.",
       "Built a shared KendoReact component library to standardize UI across products.",
       "Improved performance with lazy loading, memoization, and code splitting, reducing bundle size by 25%.",
-      "Mentor developers on TypeScript, React Query, and scalable UI patterns.",
+      "Mentor developers on TypeScript, TanStack React Query, and scalable UI patterns.",
     ],
   },
   {
@@ -106,19 +106,19 @@ const skills = [
   "TypeScript",
   "JavaScript (ES6+)",
   "Tailwind CSS",
-  "React Query",
+  "TanStack React Query",
   "KendoReact",
   "Material UI",
   "Redux",
   "Storybook",
-  "Jest / RTL / Vitest",
+  "Testing Library / Vitest / jsdom",
   "UI Architecture",
   "Design Systems",
   "Responsive UI",
 ];
 
 const cardTransition =
-  "transition-[transform,box-shadow,border-color] duration-300 ease-out motion-reduce:transition-none";
+  "marketing-transition-standard transition-[transform,box-shadow,border-color] motion-reduce:transition-none";
 
 export default function HomePage() {
   return (
@@ -170,7 +170,7 @@ export default function HomePage() {
               data-ga-category="portfolio_cta"
               data-ga-label="View Project"
               data-ga-location="hero"
-              className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
+              className="marketing-transition-standard inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
             >
               See Live Demo
             </Link>
@@ -182,7 +182,7 @@ export default function HomePage() {
               data-ga-category="portfolio_cta"
               data-ga-label="Download Resume"
               data-ga-location="hero"
-              className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
+              className="marketing-transition-standard inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white/90 px-5 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
             >
               Download Resume (PDF)
             </a>
@@ -224,7 +224,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="projects" className="mx-auto max-w-6xl px-6 py-16">
+      <section
+        id="projects"
+        className="marketing-reveal-up mx-auto max-w-6xl px-6 py-16"
+      >
         <SectionHeading
           title="Featured Work"
           description="Selected work that highlights frontend architecture, product design thinking, and interactive UI development."
@@ -247,7 +250,7 @@ export default function HomePage() {
                   data-ga-category="portfolio_project"
                   data-ga-label={project.title}
                   data-ga-location="featured_work"
-                  className="inline-flex items-center text-sm font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/40 focus-visible:ring-offset-2 motion-reduce:transition-none"
+                  className="marketing-transition-standard inline-flex items-center text-sm font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/40 focus-visible:ring-offset-2 motion-reduce:transition-none"
                 >
                   {project.cta}
                 </Link>
@@ -258,7 +261,7 @@ export default function HomePage() {
               return (
                 <div
                   key={project.title}
-                  className={`group relative rounded-2xl bg-linear-to-br from-[#1e3a5f]/35 via-indigo-400/25 to-slate-200/80 p-px shadow-sm ${cardTransition} hover:-translate-y-1 hover:shadow-xl focus-within:-translate-y-1 focus-within:shadow-xl motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0`}
+                  className={`marketing-reveal-up group relative rounded-2xl bg-linear-to-br from-[#1e3a5f]/35 via-indigo-400/25 to-slate-200/80 p-px shadow-sm ${cardTransition} hover:-translate-y-1 hover:shadow-xl focus-within:-translate-y-1 focus-within:shadow-xl motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0`}
                 >
                   <div
                     className={`h-full rounded-[calc(1rem-1px)] border border-transparent bg-white p-6 ${cardTransition} group-hover:border-slate-200/80`}
@@ -272,7 +275,7 @@ export default function HomePage() {
             return (
               <div
                 key={project.title}
-                className={`group relative rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ${cardTransition} hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg focus-within:-translate-y-1 focus-within:border-slate-300 focus-within:shadow-lg motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0`}
+                className={`marketing-reveal-up group relative rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ${cardTransition} hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg focus-within:-translate-y-1 focus-within:border-slate-300 focus-within:shadow-lg motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0`}
               >
                 {inner}
               </div>
@@ -281,7 +284,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="experience" className="mx-auto max-w-6xl px-6 py-16">
+      <section
+        id="experience"
+        className="marketing-reveal-up marketing-reveal-delay-1 mx-auto max-w-6xl px-6 py-16"
+      >
         <SectionHeading
           title="Professional Experience"
           description="Roles focused on frontend architecture, reusable component systems, and high-quality product delivery."
@@ -291,7 +297,7 @@ export default function HomePage() {
           {experience.map((item) => (
             <article
               key={`${item.company}-${item.period}`}
-              className={`rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ${cardTransition} hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md motion-reduce:hover:translate-y-0`}
+              className={`marketing-reveal-up rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ${cardTransition} hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md motion-reduce:hover:translate-y-0`}
             >
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div>
@@ -320,7 +326,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-4" id="skills">
+      <section
+        className="marketing-reveal-up marketing-reveal-delay-1 mx-auto max-w-6xl px-6 py-4"
+        id="skills"
+      >
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm">
           <div className="space-y-5">
             <div className="flex items-center gap-3">
@@ -337,7 +346,7 @@ export default function HomePage() {
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-slate-200/90 bg-slate-50/90 px-4 py-2 text-sm text-slate-700 shadow-sm transition-[color,background-color,border-color,box-shadow] duration-200 hover:border-[#1e3a5f]/35 hover:bg-white hover:text-[#1e3a5f] hover:shadow-sm motion-reduce:transition-none"
+                  className="marketing-transition-standard rounded-full border border-slate-200/90 bg-slate-50/90 px-4 py-2 text-sm text-slate-700 shadow-sm transition-[color,background-color,border-color,box-shadow] duration-200 hover:border-[#1e3a5f]/35 hover:bg-white hover:text-[#1e3a5f] hover:shadow-sm motion-reduce:transition-none"
                 >
                   {skill}
                 </span>
@@ -347,7 +356,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16" id="workflow">
+      <section
+        className="marketing-reveal-up marketing-reveal-delay-2 mx-auto max-w-6xl px-6 py-16"
+        id="workflow"
+      >
         <div className="grid gap-6 md:grid-cols-3">
           <div
             className={`rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm ${cardTransition} hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md motion-reduce:hover:translate-y-0`}
@@ -390,7 +402,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16" id="contact">
+      <section
+        className="marketing-reveal-up marketing-reveal-delay-2 mx-auto max-w-6xl px-6 py-16"
+        id="contact"
+      >
         <div className="rounded-2xl bg-[#1e3a5f] p-8 text-white shadow-[0_25px_50px_-12px_rgba(30,58,95,0.45)] ring-1 ring-white/10">
           <div className="max-w-2xl space-y-4">
             <h2 className="font-display text-2xl font-semibold tracking-tight md:text-[1.75rem]">
@@ -408,7 +423,7 @@ export default function HomePage() {
                 data-ga-category="portfolio_cta"
                 data-ga-label="See Live Demo"
                 data-ga-location="contact"
-                className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-medium text-[#1e3a5f] shadow-sm transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
+                className="marketing-transition-standard inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-medium text-[#1e3a5f] shadow-sm transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
               >
                 See Live Demo
               </Link>
@@ -418,7 +433,7 @@ export default function HomePage() {
                 data-ga-category="portfolio_cta"
                 data-ga-label="Schedule intro call"
                 data-ga-location="contact"
-                className="inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
+                className="marketing-transition-standard inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
               >
                 Schedule Intro Call
               </a>
@@ -428,7 +443,7 @@ export default function HomePage() {
                 data-ga-category="portfolio_cta"
                 data-ga-label="Email Me"
                 data-ga-location="contact"
-                className="inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
+                className="marketing-transition-standard inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
               >
                 Email Me
               </a>
@@ -440,7 +455,7 @@ export default function HomePage() {
                 data-ga-category="portfolio_cta"
                 data-ga-label="LinkedIn"
                 data-ga-location="contact"
-                className="inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
+                className="marketing-transition-standard inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e3a5f] motion-reduce:transition-none"
               >
                 LinkedIn
               </a>

@@ -31,14 +31,14 @@ export default function BuildingWithAiPage() {
         <div className="relative z-10 mx-auto max-w-3xl px-6 py-12 lg:py-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
             <div className="order-2 min-w-0 flex-1 lg:order-1">
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#1e3a5f]">
+              <p className="marketing-fade-up text-sm font-medium uppercase tracking-[0.2em] text-[#1e3a5f]">
                 Meta / process
               </p>
-              <h1 className="font-display mt-3 text-3xl font-semibold leading-snug tracking-tight text-slate-900 md:text-[2rem] md:leading-tight">
+              <h1 className="marketing-fade-up marketing-fade-up-delay font-display mt-3 text-3xl font-semibold leading-snug tracking-tight text-slate-900 md:text-[2rem] md:leading-tight">
                 I built this portfolio with an extremely enthusiastic pair
                 programmer
               </h1>
-              <p className="mt-4 text-base leading-[1.75] text-slate-600">
+              <p className="marketing-fade-up marketing-fade-up-delay-2 mt-4 text-base leading-[1.75] text-slate-600">
                 The enthusiastic part is Cursor. The “actually ships” part is
                 still me—reading diffs, deciding architecture, and saying no when
                 the UI looks done but the logic is doing interpretive dance.
@@ -53,7 +53,7 @@ export default function BuildingWithAiPage() {
 
       <article className="mx-auto max-w-3xl px-6 pb-16 pt-12">
         <div className="space-y-10 text-base leading-7 text-slate-600">
-          <section className="rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm">
+          <section className="marketing-reveal-up rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               TL;DR for recruiters
             </h2>
@@ -72,12 +72,12 @@ export default function BuildingWithAiPage() {
               </li>
               <li>
                 Optimized for maintainable patterns (App Router boundaries,
-                React Query data flow, reusable UI composition).
+                TanStack React Query data flow, reusable UI composition).
               </li>
             </ul>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-1 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               Why this site exists (the honest version)
             </h2>
@@ -96,7 +96,7 @@ export default function BuildingWithAiPage() {
             </p>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-1 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               The shift: Cursor as pair programmer, not autopilot
             </h2>
@@ -113,7 +113,7 @@ export default function BuildingWithAiPage() {
             </p>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-1 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               My very opinionated stack (and why I’m not sorry)
             </h2>
@@ -178,7 +178,7 @@ export default function BuildingWithAiPage() {
             </p>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-2 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               What I actually learned (the habits, not the hype)
             </h2>
@@ -203,7 +203,7 @@ export default function BuildingWithAiPage() {
             </ul>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-2 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               What Cursor is actually good at (spoiler: not “vibes”)
             </h2>
@@ -219,7 +219,7 @@ export default function BuildingWithAiPage() {
             </p>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-2 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               The part where I stopped trusting the green diff
             </h2>
@@ -242,7 +242,7 @@ export default function BuildingWithAiPage() {
             </p>
           </section>
 
-          <section className="space-y-4">
+          <section className="marketing-reveal-up marketing-reveal-delay-2 space-y-4">
             <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               How I use it in real life
             </h2>
@@ -261,14 +261,14 @@ export default function BuildingWithAiPage() {
           </p>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+        <div className="marketing-reveal-up marketing-reveal-delay-2 mt-12 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/"
             data-ga-event="building_with_ai_nav_click"
             data-ga-category="portfolio_navigation"
             data-ga-label="Back to portfolio"
             data-ga-location="building_with_ai_footer"
-            className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="marketing-transition-standard inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Back to portfolio
           </Link>
@@ -278,7 +278,7 @@ export default function BuildingWithAiPage() {
             data-ga-category="portfolio_navigation"
             data-ga-label="Engineering notes"
             data-ga-location="building_with_ai_footer"
-            className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="marketing-transition-standard inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Engineering notes
           </Link>
@@ -288,7 +288,7 @@ export default function BuildingWithAiPage() {
             data-ga-category="portfolio_navigation"
             data-ga-label="See Live Demo"
             data-ga-location="building_with_ai_footer"
-            className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="marketing-transition-standard inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             See Live Demo
           </Link>

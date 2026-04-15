@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 const SECTION_LINKS = [
   { href: "/#experience", label: "Experience" },
@@ -15,11 +15,15 @@ const PAGE_LINKS = [{ href: "/building-with-ai", label: "How I built this" }] as
 
 export default function MarketingMobileNav() {
   const [open, setOpen] = useState(false);
-  const panelId = useId();
-  const portalContainer = useMemo(
-    () => (typeof document !== "undefined" ? document.body : null),
-    [],
+  const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(
+    null,
   );
+  const panelId = useId();
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    setPortalContainer(document.body);
+  }, []);
 
   useEffect(() => {
     if (!open) return;

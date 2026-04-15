@@ -25,6 +25,12 @@
   --success: #16a34a;
   --warning: #d97706;
   --danger: #dc2626;
+
+  /* Motion tokens */
+  --motion-duration-fast: 320ms;
+  --motion-duration-base: 620ms;
+  --motion-duration-slow: 760ms;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -69,20 +75,59 @@ body {
   }
 }
 
+@keyframes marketing-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.625rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .marketing-hero-glow {
     animation: marketing-hero-breathe 14s ease-in-out infinite;
   }
 
   .marketing-fade-up {
-    animation: marketing-fade-up 0.65s ease-out both;
+    animation: marketing-fade-up var(--motion-duration-slow) var(--motion-ease-out)
+      both;
+  }
+
+  .marketing-reveal-up {
+    animation: marketing-reveal-up var(--motion-duration-base)
+      var(--motion-ease-out) both;
   }
 
   .marketing-fade-up-delay {
-    animation-delay: 0.08s;
+    animation-delay: 0.12s;
   }
 
   .marketing-fade-up-delay-2 {
-    animation-delay: 0.16s;
+    animation-delay: 0.22s;
+  }
+
+  .marketing-reveal-delay-1 {
+    animation-delay: 0.1s;
+  }
+
+  .marketing-reveal-delay-2 {
+    animation-delay: 0.18s;
+  }
+
+  .marketing-transition-standard {
+    transition-duration: var(--motion-duration-fast);
+    transition-timing-function: var(--motion-ease-out);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketing-fade-up,
+  .marketing-reveal-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
