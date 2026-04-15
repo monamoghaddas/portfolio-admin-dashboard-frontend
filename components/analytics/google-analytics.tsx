@@ -1,8 +1,14 @@
 "use client";
 
 import Script from "next/script";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { pageView, trackEvent } from "@/lib/analytics/google-analytics";
 
 type GoogleAnalyticsProps = {
@@ -14,6 +20,43 @@ type QueuedEvent = {
   params: Record<string, string | number | boolean | null | undefined>;
 };
 
+const LOCATION_CHANGE_EVENT = "ga-location-change";
+
+function subscribeToLocationSearch(onStoreChange: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const notify = () => onStoreChange();
+  const originalPushState = window.history.pushState;
+  const originalReplaceState = window.history.replaceState;
+
+  window.history.pushState = function pushStateWrapper(...args) {
+    originalPushState.apply(this, args);
+    window.dispatchEvent(new Event(LOCATION_CHANGE_EVENT));
+  };
+
+  window.history.replaceState = function replaceStateWrapper(...args) {
+    originalReplaceState.apply(this, args);
+    window.dispatchEvent(new Event(LOCATION_CHANGE_EVENT));
+  };
+
+  window.addEventListener("popstate", notify);
+  window.addEventListener(LOCATION_CHANGE_EVENT, notify);
+
+  return () => {
+    window.history.pushState = originalPushState;
+    window.history.replaceState = originalReplaceState;
+    window.removeEventListener("popstate", notify);
+    window.removeEventListener(LOCATION_CHANGE_EVENT, notify);
+  };
+}
+
+function getLocationSearchSnapshot() {
+  if (typeof window === "undefined") return "";
+  return window.location.search;
+}
+
 declare global {
   interface Window {
     __gaReady?: boolean;
@@ -22,7 +65,11 @@ declare global {
 
 export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const locationSearch = useSyncExternalStore(
+    subscribeToLocationSearch,
+    getLocationSearchSnapshot,
+    () => "",
+  );
   const [isGaReady, setIsGaReady] = useState(false);
   const queuedEventsRef = useRef<QueuedEvent[]>([]);
 
@@ -58,10 +105,10 @@ export default function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
   useEffect(() => {
     if (!isGaReady) return;
     if (!pathname) return;
-    const query = searchParams?.toString();
+    const query = locationSearch.replace(/^\?/, "");
     const path = query ? `${pathname}?${query}` : pathname;
     pageView(gaId, path);
-  }, [gaId, isGaReady, pathname, searchParams]);
+  }, [gaId, isGaReady, locationSearch, pathname]);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
