@@ -32,15 +32,57 @@
 }
 
 html {
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
+}
+
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, "Times New Roman", serif;
+}
+
+/* Hero: subtle ambient motion (respects reduced motion via media query). */
+@keyframes marketing-hero-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes marketing-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marketing-hero-glow {
+    animation: marketing-hero-breathe 14s ease-in-out infinite;
+  }
+
+  .marketing-fade-up {
+    animation: marketing-fade-up 0.65s ease-out both;
+  }
+
+  .marketing-fade-up-delay {
+    animation-delay: 0.08s;
+  }
+
+  .marketing-fade-up-delay-2 {
+    animation-delay: 0.16s;
+  }
 }

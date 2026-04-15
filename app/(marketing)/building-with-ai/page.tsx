@@ -17,20 +17,28 @@ export default function BuildingWithAiPage() {
   return (
     <div className="min-h-screen bg-[#f7f8fa]">
       <section
-        className="border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,rgba(30,58,95,0.14),transparent_55%),linear-gradient(to_bottom_right,#f1f5f9,#e0e7ff,#eef2ff)]"
+        className="relative overflow-hidden border-b border-slate-200/90 bg-[linear-gradient(to_bottom_right,#f1f5f9,#e8edf8,#e0e7ff)]"
         aria-label="Introduction"
       >
-        <div className="mx-auto max-w-3xl px-6 py-12 lg:py-16">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,58,95,0.18),transparent_48%),radial-gradient(circle_at_90%_10%,rgba(99,102,241,0.12),transparent_40%)]"
+          aria-hidden
+        />
+        <div
+          className="marketing-hero-glow pointer-events-none absolute -right-20 -top-24 h-[min(50vw,22rem)] w-[min(50vw,22rem)] rounded-full bg-indigo-400/20 blur-3xl motion-reduce:animate-none"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto max-w-3xl px-6 py-12 lg:py-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-14">
             <div className="order-2 min-w-0 flex-1 lg:order-1">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#1e3a5f]">
                 Meta / process
               </p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900">
+              <h1 className="font-display mt-3 text-3xl font-semibold leading-snug tracking-tight text-slate-900 md:text-[2rem] md:leading-tight">
                 I built this portfolio with an extremely enthusiastic pair
                 programmer
               </h1>
-              <p className="mt-4 text-base leading-7 text-slate-600">
+              <p className="mt-4 text-base leading-[1.75] text-slate-600">
                 The enthusiastic part is Cursor. The “actually ships” part is
                 still me—reading diffs, deciding architecture, and saying no when
                 the UI looks done but the logic is doing interpretive dance.
@@ -46,7 +54,7 @@ export default function BuildingWithAiPage() {
       <article className="mx-auto max-w-3xl px-6 pb-16 pt-12">
         <div className="space-y-10 text-base leading-7 text-slate-600">
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               Why this site exists (the honest version)
             </h2>
             <p>
@@ -65,7 +73,7 @@ export default function BuildingWithAiPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               The shift: Cursor as pair programmer, not autopilot
             </h2>
             <p>
@@ -82,7 +90,7 @@ export default function BuildingWithAiPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               My very opinionated stack (and why I’m not sorry)
             </h2>
             <p>
@@ -91,7 +99,7 @@ export default function BuildingWithAiPage() {
               credible CRUD demo on the app side—while staying easy to review when
               churn is high.
             </p>
-            <ul className="space-y-4 border-l-2 border-slate-200 pl-5">
+            <ul className="space-y-4 border-l-2 border-[#1e3a5f]/20 pl-5">
               <li>
                 <strong className="text-slate-800">Next.js (App Router) + Route Handlers.</strong>{" "}
                 One framework for the landing pages and a real{" "}
@@ -147,7 +155,7 @@ export default function BuildingWithAiPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               What I actually learned (the habits, not the hype)
             </h2>
             <ul className="list-inside list-disc space-y-2 pl-1">
@@ -172,7 +180,7 @@ export default function BuildingWithAiPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               What Cursor is actually good at (spoiler: not “vibes”)
             </h2>
             <p>
@@ -188,7 +196,7 @@ export default function BuildingWithAiPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               The part where I stopped trusting the green diff
             </h2>
             <p>
@@ -211,7 +219,7 @@ export default function BuildingWithAiPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="font-display text-xl font-semibold tracking-tight text-slate-900">
               How I use it in real life
             </h2>
             <p>
@@ -222,7 +230,7 @@ export default function BuildingWithAiPage() {
             </p>
           </section>
 
-          <p className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm leading-6 text-slate-600 shadow-sm">
+          <p className="rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm leading-relaxed text-slate-600 shadow-sm ring-1 ring-slate-200/60">
             <strong className="text-slate-800">Disclaimer:</strong> This is my
             personal experience building this repo—not a sponsored post, and not
             a claim that every team should work the same way.
@@ -232,19 +240,19 @@ export default function BuildingWithAiPage() {
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Back to portfolio
           </Link>
           <Link
             href="/engineering"
-            className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Engineering notes
           </Link>
           <Link
             href="/dashboard"
-            className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Open dashboard
           </Link>

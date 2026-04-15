@@ -29,3 +29,30 @@ Open [http://localhost:3000](http://localhost:3000).
 Next.js (App Router), React, TypeScript, Tailwind CSS v4, TanStack React Query, Sonner.
 
 Add your public repository URL in [`lib/site.ts`](lib/site.ts) as `SITE_GITHUB_URL` to show a GitHub link on the engineering page.
+
+## Google Analytics 4 setup
+
+1. Create a GA4 Web Data Stream and copy your measurement ID (format: `G-XXXXXXXXXX`).
+2. Add the ID to your environment:
+
+```bash
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+3. Restart dev server after setting the variable.
+
+### Tracked events
+
+- Automatic page views on route changes.
+- CTA events from the marketing home page:
+  - `cta_dashboard_click`
+  - `cta_resume_download_click`
+  - `cta_email_click`
+  - `cta_linkedin_click`
+
+### Verify tracking
+
+- Open the site and interact with CTAs.
+- In browser DevTools Network, confirm requests to `googletagmanager.com` / GA `collect`.
+- In GA4, open **Realtime** (and **DebugView** if needed) to confirm `page_view` and CTA events.
+- If `NEXT_PUBLIC_GA_ID` is missing, the analytics script is not injected.

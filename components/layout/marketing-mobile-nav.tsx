@@ -61,7 +61,7 @@ export default function MarketingMobileNav() {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -71,7 +71,7 @@ export default function MarketingMobileNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -81,7 +81,7 @@ export default function MarketingMobileNav() {
           <div className="border-t border-slate-200 p-4">
             <Link
               href="/dashboard"
-              className="flex items-center justify-center rounded-md bg-[#1e3a5f] px-4 py-3 text-sm font-medium text-white transition hover:opacity-90"
+              className="flex items-center justify-center rounded-md bg-[#1e3a5f] px-4 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2"
               onClick={() => setOpen(false)}
             >
               Dashboard
