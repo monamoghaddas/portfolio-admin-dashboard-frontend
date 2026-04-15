@@ -215,6 +215,10 @@ export default function HomePage() {
                 </p>
                 <Link
                   href={project.href}
+                  data-ga-event="featured_project_click"
+                  data-ga-category="portfolio_project"
+                  data-ga-label={project.title}
+                  data-ga-location="featured_work"
                   className="inline-flex items-center text-sm font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/40 focus-visible:ring-offset-2 motion-reduce:transition-none"
                 >
                   {project.cta}

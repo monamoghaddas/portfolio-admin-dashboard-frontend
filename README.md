@@ -49,6 +49,11 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
   - `cta_resume_download_click`
   - `cta_email_click`
   - `cta_linkedin_click`
+- Project and navigation events from marketing pages:
+  - `featured_project_click` (Featured Work card links)
+  - `building_with_ai_nav_click` (footer links on `/building-with-ai`)
+  - `engineering_story_click` (story link from `/engineering`)
+  - `engineering_nav_click` (footer links on `/engineering`)
 
 ### Verify tracking
 

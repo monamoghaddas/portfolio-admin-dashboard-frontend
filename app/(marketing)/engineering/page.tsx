@@ -118,6 +118,10 @@ export default function EngineeringPage() {
           parts? Read{" "}
           <Link
             href="/building-with-ai"
+            data-ga-event="engineering_story_click"
+            data-ga-category="portfolio_navigation"
+            data-ga-label="Building this portfolio with AI and Cursor"
+            data-ga-location="engineering_content"
             className="font-medium text-[#1e3a5f] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/40 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Building this portfolio with AI and Cursor
@@ -128,12 +132,20 @@ export default function EngineeringPage() {
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/"
+            data-ga-event="engineering_nav_click"
+            data-ga-category="portfolio_navigation"
+            data-ga-label="Back to portfolio"
+            data-ga-location="engineering_footer"
             className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Back to portfolio
           </Link>
           <Link
             href="/dashboard"
+            data-ga-event="engineering_nav_click"
+            data-ga-category="portfolio_navigation"
+            data-ga-label="Open dashboard"
+            data-ga-location="engineering_footer"
             className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Open dashboard
@@ -143,6 +155,10 @@ export default function EngineeringPage() {
               href={SITE_GITHUB_URL}
               target="_blank"
               rel="noreferrer"
+              data-ga-event="engineering_nav_click"
+              data-ga-category="portfolio_navigation"
+              data-ga-label="View on GitHub"
+              data-ga-location="engineering_footer"
               className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
             >
               View on GitHub

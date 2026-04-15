@@ -240,18 +240,30 @@ export default function BuildingWithAiPage() {
         <div className="mt-12 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/"
+            data-ga-event="building_with_ai_nav_click"
+            data-ga-category="portfolio_navigation"
+            data-ga-label="Back to portfolio"
+            data-ga-location="building_with_ai_footer"
             className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Back to portfolio
           </Link>
           <Link
             href="/engineering"
+            data-ga-event="building_with_ai_nav_click"
+            data-ga-category="portfolio_navigation"
+            data-ga-label="Engineering notes"
+            data-ga-location="building_with_ai_footer"
             className="inline-flex items-center justify-center rounded-md border border-slate-300/90 bg-white px-5 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/35 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Engineering notes
           </Link>
           <Link
             href="/dashboard"
+            data-ga-event="building_with_ai_nav_click"
+            data-ga-category="portfolio_navigation"
+            data-ga-label="Open dashboard"
+            data-ga-location="building_with_ai_footer"
             className="inline-flex items-center justify-center rounded-md bg-[#1e3a5f] px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/45 focus-visible:ring-offset-2 motion-reduce:transition-none"
           >
             Open dashboard
